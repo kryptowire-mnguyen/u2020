@@ -31,7 +31,7 @@ steps:
     apksignerKeystorePassword: 'test123'
     apksignerKeystoreAlias: 'test'
     apksignerKeyPassword: 'test123'
-    apksignerArguments: --out $(Build.SourcesDirectory)/app/build/outputs/apk/release/demo.release.apk
+    apksignerArguments: --out $(Build.SourcesDirectory)/app/build/outputs/apk/internal/release/demo.release.apk
     zipalign: true
 
 - task: CopyFiles@2
@@ -43,14 +43,14 @@ steps:
     
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/internal/release/'
     artifactName: 'apks'
     publishLocation: 'container'
     
 - task: KryptowireMAST@1
   continueOnError: true
   inputs:
-    filepath: '$(Build.SourcesDirectory)/app/build/outputs/apk/release/demo.release.apk'
+    filepath: '$(Build.SourcesDirectory)/app/build/outputs/apk/internal/release/demo.release.apk'
     apikey: 'Yqsx9T83A5T1vENxaU4n5KGupOSNAOHnLl48'
     platform: 'android'
     resultsDir: '$(Build.ArtifactStagingDirectory)/KryptowireResults'
